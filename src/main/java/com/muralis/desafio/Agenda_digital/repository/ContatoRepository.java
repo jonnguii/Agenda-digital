@@ -4,7 +4,6 @@ import com.muralis.desafio.Agenda_digital.model.Cliente;
 import com.muralis.desafio.Agenda_digital.model.Contato;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Repository

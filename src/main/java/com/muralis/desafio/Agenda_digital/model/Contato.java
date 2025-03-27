@@ -1,6 +1,5 @@
 package com.muralis.desafio.Agenda_digital.model;
 
-
 import jakarta.persistence.*;
 import lombok.Data;
 
