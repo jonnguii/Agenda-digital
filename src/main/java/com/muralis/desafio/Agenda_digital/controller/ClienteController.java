@@ -6,11 +6,12 @@ import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController //Simbolizar que a classe é um Controlador para requicoes http
 @RequiredArgsConstructor //Utiliza a ferramenta Lombok, que evita criaçãoo de código manual e repetitivo
-@RequestMapping ("/clientes") //Endpoint base
+@RequestMapping("/clientes") //Endpoint base
 public class ClienteController {
 
     private final ClienteService clienteService;
@@ -27,17 +28,17 @@ public class ClienteController {
 
     @PutMapping //Endpoint editar cliente
     public Cliente editarCliente(@RequestBody Cliente cliente) { //Informa ao spring que os dados editados virão da requisição https
-    return clienteService.editarCliente(cliente); //chama o método de editarCliente do service
+        return clienteService.editarCliente(cliente); //chama o método de editarCliente do service
 
     }
 
     @GetMapping("/{id}") //Endpoint buscar cliente por id
-    public Cliente buscarCliente (@PathVariable Long id) { //Informa ao spring que o id vem da URL que será passada
+    public Cliente buscarCliente(@PathVariable Long id) { //Informa ao spring que o id vem da URL que será passada
         return clienteService.buscarCliente(id); //chama o método de buscarCliente do service
     }
 
     @DeleteMapping("/{id}") //Endpoint deletar cliente por ID
-    public void deletarCliente (@PathVariable Long id) { //Informa ao spring que o cliente será deletado pelo id da URL da requisicao http
+    public void deletarCliente(@PathVariable Long id) { //Informa ao spring que o cliente será deletado pelo id da URL da requisicao http
         clienteService.deletarCliente(id); //chama o método de deletarCliente do service
     }
 }

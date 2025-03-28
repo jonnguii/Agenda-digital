@@ -4,6 +4,7 @@ import com.muralis.desafio.Agenda_digital.model.Contato;
 import com.muralis.desafio.Agenda_digital.repository.ContatoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -13,7 +14,7 @@ import java.util.Optional;
 public class ContatoService {
     private final ContatoRepository contatoRepository; //Acesso ao banco. Sem necessidade de escrever SQL por conta do JPA
 
-    public Contato cadastrarContato (Contato contato) { //metodo de salvar contato presente na lista
+    public Contato cadastrarContato(Contato contato) { //metodo de salvar contato presente na lista
         List<Contato> contatoExiste = contatoRepository.findByCliente(contato.getCliente());
 
         if (!contatoExiste.isEmpty()) { //se não estiver vazia, ja existe contato
@@ -24,11 +25,11 @@ public class ContatoService {
     }
 
 
-    public List<Contato> listarContatos(){ //metodo de listar todos os contatos
+    public List<Contato> listarContatos() { //metodo de listar todos os contatos
         return contatoRepository.findAll();
     }
 
-    public Contato editarContato (Contato contatos) { //metodo com parametro de objeto com novos valores inseridos na requisicao front
+    public Contato editarContato(Contato contatos) { //metodo com parametro de objeto com novos valores inseridos na requisicao front
         Optional<Contato> contatoExistente = contatoRepository.findById(contatos.getId()); //verificar se o objeto é null
 
         if (contatoExistente.isPresent()) {
@@ -46,7 +47,7 @@ public class ContatoService {
         }
     }
 
-    public void deletarContato (Long id){
+    public void deletarContato(Long id) {
         Optional<Contato> contatoExiste = contatoRepository.findById(id);
 
         if (contatoExiste.isPresent()) {

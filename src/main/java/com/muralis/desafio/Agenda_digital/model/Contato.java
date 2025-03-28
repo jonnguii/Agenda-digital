@@ -20,6 +20,7 @@ public class Contato {
     private String observacao;
 
     @ManyToOne //Muitos contatos, mas pertence a um unico cliente
-    @JoinColumn(name = "cliente_id", nullable = false) //foreign key "cliente_id" not null = precisa obrigatoriamente estar ligado a um cliente
+    @JoinColumn(name = "cliente_id", nullable = false)
+    //foreign key "cliente_id" not null = precisa obrigatoriamente estar ligado a um cliente
     private Cliente cliente; //Objeto do tipo Cliente que vira a coluna "cliente_id"
 }

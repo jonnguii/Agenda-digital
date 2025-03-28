@@ -1,8 +1,10 @@
 package com.muralis.desafio.Agenda_digital.service;
 
 import com.muralis.desafio.Agenda_digital.model.Cliente;
+
 import java.util.List;
 import java.util.Optional;
+
 import com.muralis.desafio.Agenda_digital.repository.ClienteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,9 +23,9 @@ public class ClienteService {
 
     public List<Cliente> listarCliente() { //metodo de listar todos os clientes
         return clienteRepository.findAll();
-        }
+    }
 
-    public Cliente editarCliente (Cliente cliente) { //metodo com parametros de objeto contendo os novos dados inseridos na requisicao front
+    public Cliente editarCliente(Cliente cliente) { //metodo com parametros de objeto contendo os novos dados inseridos na requisicao front
         Optional<Cliente> clienteExistente = clienteRepository.findById(cliente.getId()); // Optional chamado clienteExiste que busca um id passado na requisicao front no banco de dados
 
         if (clienteExistente.isPresent()) { //verifica se existe
@@ -52,7 +54,7 @@ public class ClienteService {
         }
     }
 
-    public void deletarCliente (Long id) { //metodo de deletar cliente pelo ID
+    public void deletarCliente(Long id) { //metodo de deletar cliente pelo ID
         Optional<Cliente> clienteEncontrado = clienteRepository.findById(id);
 
         if (clienteEncontrado.isPresent()) {

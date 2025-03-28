@@ -11,23 +11,24 @@ import java.util.List;
 @Entity //Informa que é uma entidade no Data Base
 public class Cliente {
 
-        @Id // gera id pro atributo
-        @GeneratedValue(strategy = GenerationType.IDENTITY) // gera id auto-incremental
-        private Long id;
+    @Id // gera id pro atributo
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // gera id auto-incremental
+    private Long id;
 
-        @Column(nullable = false) // not null
-        private String nome;
+    @Column(nullable = false) // not null
+    private String nome;
 
-        @Column(nullable = false, unique = true) //not null + unico
-        private String cpf;
+    @Column(nullable = false, unique = true) //not null + unico
+    private String cpf;
 
-        private LocalDate dataNascimento; //Java usa LocalDate em vez de Date
+    private LocalDate dataNascimento; //Java usa LocalDate em vez de Date
 
-        private String endereco;
+    private String endereco;
 
-        @OneToMany //Um cliente pode ter varios contatos
-                (mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true) //Informamos que ja mapeamos a relação e que ao apagarmos um Cliemte, os contatos também apagam. Ao apagarmos um cliente, ele é deletado do DB.
-        private List<Contato> contatos = new ArrayList<>(); //Cria uma lista de contatos
+    @OneToMany //Um cliente pode ter varios contatos
+            (mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    //Informamos que ja mapeamos a relação e que ao apagarmos um Cliemte, os contatos também apagam. Ao apagarmos um cliente, ele é deletado do DB.
+    private List<Contato> contatos = new ArrayList<>(); //Cria uma lista de contatos
 }
 
 
