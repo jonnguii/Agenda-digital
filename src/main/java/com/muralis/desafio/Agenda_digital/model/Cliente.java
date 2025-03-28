@@ -1,7 +1,8 @@
 package com.muralis.desafio.Agenda_digital.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,10 +16,10 @@ public class Cliente {
         private Long id;
 
         @Column(nullable = false) // not null
-        String nome;
+        private String nome;
 
         @Column(nullable = false, unique = true) //not null + unico
-        String Cpf;
+        private String cpf;
 
         private LocalDate dataNascimento; //Java usa LocalDate em vez de Date
 

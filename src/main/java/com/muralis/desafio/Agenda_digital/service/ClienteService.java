@@ -7,16 +7,14 @@ import com.muralis.desafio.Agenda_digital.repository.ClienteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-@Service
 @RequiredArgsConstructor
+@Service
 public class ClienteService {
     private final ClienteRepository clienteRepository; //Acesso ao banco
 
-    public Cliente salvarCliente(Cliente cliente) { //metodo de "criar cliente"
-        Optional<Cliente> clienteExiste = clienteRepository.findByCpf(cliente.getCpf());
-
-        if (clienteExiste.isPresent()) {
-            throw new RuntimeException("Já existe um cliente com este CPF");
+    public Cliente cadastrarCliente(Cliente cliente) {
+        if (clienteRepository.existeCpf(cliente.getCpf())) {
+            throw new RuntimeException("Já existe um cliente cadastrado com esse CPF");
         }
         return clienteRepository.save(cliente);
     }
@@ -25,23 +23,42 @@ public class ClienteService {
         return clienteRepository.findAll();
         }
 
-    public Cliente encontrarCliente(Cliente cliente) { //metodo de encontrar cliente pelo cpf e retorna-lo
-        Optional<Cliente> clienteEncontrado = clienteRepository.findByCpf(cliente.getCpf());
+    public Cliente editarCliente (Cliente cliente) { //metodo com parametros de objeto contendo os novos dados inseridos na requisicao front
+        Optional<Cliente> clienteExistente = clienteRepository.findById(cliente.getId()); // Optional chamado clienteExiste que busca um id passado na requisicao front no banco de dados
+
+        if (clienteExistente.isPresent()) { //verifica se existe
+            Cliente clienteAtualizado = clienteExistente.get(); //se existir, uma nova variavel recebe os valores antigos/atuais do banco
+            //editar e inserir novos dados
+            //a nova variavel seta novos dados a partir dos novos valores extraidos da requisicao front
+            clienteAtualizado.setNome(cliente.getNome());
+            clienteAtualizado.setDataNascimento(cliente.getDataNascimento());
+            clienteAtualizado.setEndereco(cliente.getEndereco());
+            clienteAtualizado.setCpf(cliente.getCpf());
+
+            return clienteRepository.save(clienteAtualizado); //save no banco de dados
+        } else {
+            return cadastrarCliente((cliente)); //se não existir, cadastra
+        }
+    }
+
+
+    public Cliente buscarCliente(Long id) { //metodo de encontrar cliente pelo cpf e retorna-lo
+        Optional<Cliente> clienteEncontrado = clienteRepository.findById(id);
 
         if (clienteEncontrado.isPresent()) {
             return clienteEncontrado.get();
         } else {
-            throw new RuntimeException(("Cliente não encontrado por esse CPF"));
+            throw new RuntimeException(("Cliente não encontrado por esse IO"));
         }
     }
 
-    public void deletarCliente (Cliente cliente) { //metodo de deletar cliente pelo cpf
-        Optional<Cliente> clienteEncontrado = clienteRepository.findByCpf(cliente.getCpf());
+    public void deletarCliente (Long id) { //metodo de deletar cliente pelo ID
+        Optional<Cliente> clienteEncontrado = clienteRepository.findById(id);
 
         if (clienteEncontrado.isPresent()) {
             clienteRepository.delete(clienteEncontrado.get());
         } else {
-            throw new RuntimeException("Cliente não encontrado por esse CPF");
+            throw new RuntimeException("Cliente não encontrado para excluir");
         }
     }
 }

@@ -7,7 +7,8 @@ import java.util.Optional;
 
     @Repository
     public interface ClienteRepository extends JpaRepository<Cliente, Long> { //JpaRepo é a interface do Spring que ja tem metodos prontos pra salvar, listar e deletar
-        Optional<Cliente> findByCpf(String Cpf); //Criamos um metodo personalizado pra procurar por cpf
+    Optional<Cliente> findByCpf (String cpf);
+    boolean existeCpf (String cpf);
     }
 
 
