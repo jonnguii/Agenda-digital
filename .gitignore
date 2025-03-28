@@ -31,3 +31,19 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Wrapper ###
+.mvn/wrapper/
+
+### SO ###
+*.class
+*.log
+*.jar
+*.war
+*.ear
+.DS_Store
+Thumbs.db
+
+### Cache ###
+target/
+out/
